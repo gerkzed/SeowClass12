@@ -7,9 +7,6 @@ public class Arrays_1 {
 		int[] numList = readFiles();
 
 		int mode = calcMode(numList);
-
-		System.out.println(Arrays.toString(numList));
-		System.out.println(mode);
 		
 	}
 
@@ -47,7 +44,7 @@ public class Arrays_1 {
 		Scanner input;
 		Scanner arrayRead;
 
-    File f = new File("list.txt");
+    File f = new File("list1.txt");
 		
 		try {
 			
@@ -72,6 +69,9 @@ public class Arrays_1 {
 				
 			}
 			
+			input.close();
+			arrayRead.close();
+			
 			return numList;
 			
 		} 
@@ -81,5 +81,7 @@ public class Arrays_1 {
 			return null;
 			
 		}
+		
 	}
+	
 }
