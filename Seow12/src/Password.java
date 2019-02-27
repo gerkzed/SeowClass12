@@ -7,44 +7,75 @@ import java.util.*;
 public class Password {
 	public static void main (String[] args) throws IOException {
 		
-		Scanner input = new Scanner(System.in);
+		String loop = "y";
 		
-		String[] prePassword = new String[5];
+		while (loop.equals("y")) {
+			
+			Scanner input = new Scanner(System.in);
+			
+			String[] prePassword = new String[5];
+			
+			try {
+				
+				while (prePassword[0] == null) {
+					
+					System.out.println("Enter first name:  ");
+					prePassword[0] = VerifyName(input.nextLine());
+					
+				}
+				
+				while (prePassword[1] == null) {
+					
+					System.out.println("Enter middle name:  ");
+					prePassword[1] = VerifyName(input.nextLine());
+					
+				}
+				
+				while (prePassword[2] == null) {
+					
+				System.out.println("Enter last name:  ");
+				prePassword[2] = VerifyName(input.nextLine());
+					
+				}
+				
+				while (prePassword[3] == null) {
+					
+				System.out.println("Enter favourite color:  ");
+				prePassword[3] = VerifyColour(input.nextLine());
+					
+				}
+				
+				while (prePassword[4] == null) {
+					
+				System.out.println("Enter phone number:  ");
+				prePassword[4] = VerifyNumber(input.nextLine());
+					
+				}
+				
+			}
+			
+			catch (InputMismatchException e) {
+				
+				System.out.println("Error: Invalid input");
+				System.exit(0);
+				
+			}
+			
+			String password = CreatePassword(prePassword);
 		
-		try {
+			System.out.println("Your password is " + password);
 			
-			System.out.println("Enter first name:  ");
-			prePassword[0] = VerifyName(input.nextLine());
-			
-			System.out.println("Enter middle name:  ");
-			prePassword[1] = VerifyName(input.nextLine());
-			
-			System.out.println("Enter last name:  ");
-			prePassword[2] = VerifyName(input.nextLine());
-			
-			System.out.println("Enter favourite color:  ");
-			prePassword[3] = VerifyColour(input.nextLine());
-			
-			System.out.println("Enter phone number:  ");
-			prePassword[4] = VerifyNumber(input.nextLine());
+			System.out.println("Generate a new password? ('y' for a new password):  ");
+			loop = input.nextLine();
 			
 			input.close();
-			
-		}
-		
-		catch (InputMismatchException e) {
-			
-			System.out.println("Error: Invalid input");
-			System.exit(0);
-			
-		}
-		
-		String password = CreatePassword(prePassword);
-	
-		System.out.println("Your password is " + password);
 		
 	}
+		
+	System.exit(0);
 
+	
+}
 	private static String CreatePassword(String[] prePassword) {
 		
 		String password = "";
@@ -71,35 +102,31 @@ public class Password {
 
 	private static String VerifyNumber(String nextLine) {
 
-		try {
-			
-			long number = Long.parseLong(nextLine.replace("-", "").replace(" ", ""));
-			
-			if (number > 0) {
+		nextLine = nextLine.replace("-", "");
+
+		if (nextLine.matches("\\d+") && nextLine.length() == 10) {
 				
-				return nextLine;
+			return nextLine.substring(1, 3);
 				
-			}
-			
-			else {
-				
-				System.out.println("Invalid number");
-				return null;
-				
-			}
-			
 		}
-		
-		catch (InputMismatchException e) {
 			
+		else {
+				
 			System.out.println("Invalid number");
 			return null;
-			
+				
 		}
+			
 	}
 
 	private static String VerifyColour(String nextLine) throws IOException {
 
+		if (nextLine.equals("")) {
+			
+			System.out.println("Error: Enter a colour");
+
+		}
+		
 		Scanner colour = new Scanner(new File("ColourList.txt"));
 		
 		String fileColours = "";
@@ -129,7 +156,6 @@ public class Password {
 		else {
 			
 			System.out.println("Invalid colour");
-			System.exit(0);
 			return null;
 			
 		}
@@ -137,18 +163,17 @@ public class Password {
 	}
 
 	private static String VerifyName(String nextLine) {
+
+		if (nextLine.replaceAll("\\s+", "").matches("[a-zA-Z]*")) {
+			
+			return nextLine;
 		
-		if (nextLine.matches(".*\\d+.*")) {
-			
-			System.out.println("Error: No numbers in name");
-			System.exit(0);
-			return null;
-			
 		}
 		
 		else {
 			
-			return nextLine;
+			System.out.println("Error: Invalid name!");
+			return null;
 			
 		}
 	}
