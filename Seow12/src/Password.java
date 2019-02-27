@@ -67,14 +67,11 @@ public class Password {
 			
 			System.out.println("Generate a new password? ('y' for a new password):  ");
 			loop = input.nextLine();
-			
-			input.close();
-		
-	}
+
+		}
 		
 	System.exit(0);
 
-	
 }
 	private static String CreatePassword(String[] prePassword) {
 		
