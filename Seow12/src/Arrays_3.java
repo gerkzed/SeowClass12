@@ -47,8 +47,7 @@ public class Arrays_3 {
 	
 	private static int[][] generateTriangle(int[][] pascalTriangle, int size) {
 		
-		
-		pascalTriangle[1] = new int[1+2];
+		pascalTriangle[1] = new int[1 + 2];
         pascalTriangle[1][1] = 1;
 
 		for (int i = 2; i <= size; i++){
