@@ -9,17 +9,16 @@ public class Arrays_1 {
 		int mode = calcMode(numList);
 
 		if (mode == -1) {
-			
+
 			System.out.println("No mode");
-			
-		}
-		
-		else {
-			
-			System.out.println("The mode of the file is: " + mode);
-			
+
 		}
 
+		else {
+
+			System.out.println("The mode of the file is: " + mode);
+
+		}
 
 	}
 
@@ -32,7 +31,7 @@ public class Arrays_1 {
 		for (int i = 0; i < numList.length; i++) {
 
 			int counter = 0;
-			
+
 			for (int j = 0; j < numList.length; j++) {
 
 				if (numList[i] == numListParallel[j]) {
@@ -50,11 +49,11 @@ public class Arrays_1 {
 			}
 
 		}
-		
+
 		if (highest == 1) {
-			
+
 			return -1;
-			
+
 		}
 
 		return mode;
