@@ -36,7 +36,7 @@ public class Arrays_3 {
 
 			size = input.nextInt();
 
-			if (size < 0) {
+			if (size <= 0) {
 
 				System.out.println("Pascal Triangle cannot be less than 1 layer! \n");
 				size = takeInput(input);

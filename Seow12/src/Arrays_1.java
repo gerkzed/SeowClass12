@@ -56,7 +56,12 @@ public class Arrays_1 {
 
 		}
 
-		return mode;
+		else {
+
+			return mode;
+
+		}
+
 	}
 
 	private static int[] readFiles() {
