@@ -5,81 +5,97 @@ public class Arrays_3
   public static void main (String args[])
   {
 
-    int size = takeInput ();
+	  Scanner input = new Scanner (System.in);  
+	
+	  int size = takeInput(input);
+	  
+	  input.close();
 
-    int[][] PascalTriangle = new int[size + 1][];
+	  int[][] PascalTriangle = new int[size + 1][];
 
-      PascalTriangle = generateTriangle (PascalTriangle, size);
+      	PascalTriangle = generateTriangle (PascalTriangle, size);
 
-    for (int i = 1; i <= PascalTriangle.length - 1; i++)
-      {
+      	for (int i = 1; i <= PascalTriangle.length - 1; i++)
+      	{
 
-	for (int j = 1; j < PascalTriangle[i].length - 1; j++)
+      		for (int j = 1; j < PascalTriangle[i].length - 1; j++)
+      		{
+
+      			System.out.print (PascalTriangle[i][j] + " ");
+
+      		}
+
+      		System.out.println ();
+
+      	}
+  	}
+
+  	private static int takeInput (Scanner input)
 	  {
-
-	    System.out.print (PascalTriangle[i][j] + " ");
-
+	
+	    int size = 0;
+	
+	    try
+	    {
+	
+	      System.out.println ("Enter number of layers to the Pascal Triangle: ");
+	      
+	      size = input.nextInt ();
+	      
+	      if(size < 0 ){
+	    	  
+	          System.out.println("Pascal Triangle cannot be less than 1 layer! \n");
+	          size = takeInput(input);
+	          
+	      }
+	      
+	      if(size > 1000) {
+	    	  
+	    	  System.out.println("Pascal Triangle cannot be that large! \n");
+	      	  size = takeInput(input);
+	    	  
+	    	  
+	      }
+	      
+	      
+	
+	    }
+	
+	    catch (InputMismatchException e)
+	    {
+	
+	      System.out.println ("Error: Invalid Input");
+	      size = takeInput(input);
+	
+	    }
+	
+	    return size;
+	    
 	  }
-
-	System.out.println ();
-
-      }
-  }
-
-  private static int takeInput ()
-  {
-
-    int size = 0;
-
-    try
-    {
-
-      System.out.println ("Enter number of layers to the Pascal Triangle");
-      Scanner input = new Scanner (System.in);
-      size = input.nextInt ();
-      input.close ();
-      
-      if(size < 0 ){
-          System.out.println("Pascal Triangle cannot be less than 1 layer. ");
-          System.exit(0);
-      }
-
-    }
-
-    catch (InputMismatchException e)
-    {
-
-      System.out.println ("Error: Invalid Input");
-      size = takeInput ();
-
-    }
-
-    return size;
-  }
-
-  private static int[][] generateTriangle (int[][]pascalTriangle, int size)
-  {
-
-    pascalTriangle[1] = new int[1 + 2];
-    pascalTriangle[1][1] = 1;
-
-    for (int i = 2; i <= size; i++)
-      {
-
-	pascalTriangle[i] = new int[i + 2];
-
-	for (int j = 1; j < pascalTriangle[i].length - 1; j++)
+	
+	  private static int[][] generateTriangle (int[][]pascalTriangle, int size)
 	  {
-
-	    pascalTriangle[i][j] =
-	      (pascalTriangle[i - 1][j - 1] + pascalTriangle[i - 1][j]);
-
+	
+	    pascalTriangle[1] = new int[1 + 2];
+	    pascalTriangle[1][1] = 1;
+	
+	    for (int i = 2; i <= size; i++)
+	      {
+	
+		pascalTriangle[i] = new int[i + 2];
+	
+		for (int j = 1; j < pascalTriangle[i].length - 1; j++)
+		  {
+	
+		    pascalTriangle[i][j] =
+		      (pascalTriangle[i - 1][j - 1] + pascalTriangle[i - 1][j]);
+	
+		  }
+	      }
+	
+	    return pascalTriangle;
+	
 	  }
-      }
-
-    return pascalTriangle;
-
-  }
-
-
-}
+	
+	
+	}
