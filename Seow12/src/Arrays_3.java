@@ -11,7 +11,7 @@ public class Arrays_3
 	  
 	  input.close();
 
-	  int[][] PascalTriangle = new int[size + 1][];
+	  long[][] PascalTriangle = new long[size + 1][];
 
       	PascalTriangle = generateTriangle (PascalTriangle, size);
 
@@ -49,7 +49,7 @@ public class Arrays_3
 	          
 	      }
 	      
-	      if(size > 1000) {
+	      if(size > 50) {
 	    	  
 	    	  System.out.println("Pascal Triangle cannot be that large! \n");
 	      	  size = takeInput(input);
@@ -73,16 +73,16 @@ public class Arrays_3
 	    
 	  }
 	
-	  private static int[][] generateTriangle (int[][]pascalTriangle, int size)
+	  private static long[][] generateTriangle (long[][] pascalTriangle, int size)
 	  {
 	
-	    pascalTriangle[1] = new int[1 + 2];
+	    pascalTriangle[1] = new long[1 + 2];
 	    pascalTriangle[1][1] = 1;
 	
 	    for (int i = 2; i <= size; i++)
 	      {
 	
-		pascalTriangle[i] = new int[i + 2];
+		pascalTriangle[i] = new long[i + 2];
 	
 		for (int j = 1; j < pascalTriangle[i].length - 1; j++)
 		  {
