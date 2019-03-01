@@ -2,37 +2,58 @@ import java.io.*;
 import java.util.*;
 
 public class Arrays_1 {
-	public static void main (String args[]) throws FileNotFoundException {
-		
+	public static void main(String args[]) throws FileNotFoundException {
+
 		int[] numList = readFiles();
 
 		int mode = calcMode(numList);
+
+		if (mode == -1) {
+			
+			System.out.println("No mode");
+			
+		}
 		
+		else {
+			
+			System.out.println("The mode of the file is: " + mode);
+			
+		}
+
+
 	}
 
 	private static int calcMode(int[] numList) {
-		
-		int maxCount = 0, mode = 0;
-		
+
+		int[] numListParallel = numList.clone();
+
+		int highest = 0, mode = 0;
+
 		for (int i = 0; i < numList.length; i++) {
-			
-			int modeCounter = 0;
+
+			int counter = 0;
 			
 			for (int j = 0; j < numList.length; j++) {
-				
-				if (numList[i] == numList[j]) {
-					
-					modeCounter++;
-					
+
+				if (numList[i] == numListParallel[j]) {
+
+					counter++;
+
 				}
 			}
-			
-			if (modeCounter > maxCount) {
-				
-				maxCount = modeCounter;
+
+			if (counter > highest) {
+
+				highest = counter;
 				mode = numList[i];
-				
+
 			}
+
+		}
+		
+		if (highest == 1) {
+			
+			return -1;
 			
 		}
 
@@ -40,48 +61,48 @@ public class Arrays_1 {
 	}
 
 	private static int[] readFiles() {
-		
+
 		Scanner input;
 		Scanner arrayRead;
 
-    File f = new File("list1.txt");
-		
+		File file = new File("list4.txt");
+
 		try {
-			
-			input = new Scanner(f);
-			
+
+			input = new Scanner(file);
+
 			int counter = 0;
-			
+
 			while (input.hasNextInt()) {
-				
+
 				counter++;
 				input.nextInt();
-				
+
 			}
-			
+
 			int[] numList = new int[counter];
-			
-			arrayRead = new Scanner(f);
-			
+
+			arrayRead = new Scanner(file);
+
 			for (int i = 0; i < numList.length; i++) {
-				
+
 				numList[i] = arrayRead.nextInt();
-				
+
 			}
-			
+
 			input.close();
 			arrayRead.close();
-			
+
 			return numList;
-			
-		} 
-		
-		catch (Exception e) {
-			
-			return null;
-			
+
 		}
-		
+
+		catch (Exception e) {
+
+			return null;
+
+		}
+
 	}
-	
+
 }
