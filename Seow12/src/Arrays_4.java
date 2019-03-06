@@ -3,6 +3,7 @@ import java.util.*;
 public class Arrays_4 {
 	public static void main(String[] args) {
 
+		// CREATE A 2D ARRAY
 		String[][] board = new String[5][5];
 
 		board = genPrizes(board);
