@@ -180,6 +180,10 @@ public class Arrays_4 {
 				System.out.println();
 				break;
 
+			case "[  PENNY ]":
+				i--;
+				break;
+
 			}
 		}
 

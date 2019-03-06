@@ -3,11 +3,13 @@ import java.util.*;
 public class Arrays_3 {
 	public static void main(String args[]) {
 
-		Scanner input = new Scanner(System.in);
-
-		int size = takeInput(input);
-
-		input.close();
+		int size = -1;
+		
+		while (size == -1) {
+			
+			size = takeInput();
+		
+		}
 
 		long[][] PascalTriangle = new long[size + 1][];
 
@@ -26,8 +28,11 @@ public class Arrays_3 {
 		}
 	}
 
-	private static int takeInput(Scanner input) {
+	private static int takeInput() {
 
+		@SuppressWarnings("resource")
+		Scanner input = new Scanner(System.in);
+		
 		int size = 0;
 
 		try {
@@ -39,14 +44,14 @@ public class Arrays_3 {
 			if (size <= 0) {
 
 				System.out.println("Pascal Triangle cannot be less than 1 layer! \n");
-				size = takeInput(input);
+				return -1;
 
 			}
 
 			if (size > 50) {
 
 				System.out.println("Pascal Triangle cannot be that large! \n");
-				size = takeInput(input);
+				return -1;
 
 			}
 
@@ -55,7 +60,7 @@ public class Arrays_3 {
 		catch (InputMismatchException e) {
 
 			System.out.println("Error: Invalid Input");
-			size = takeInput(input);
+			return -1;
 
 		}
 

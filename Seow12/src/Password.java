@@ -11,6 +11,7 @@ public class Password {
 
 		while (loop.equals("y")) {
 
+			@SuppressWarnings("resource")
 			Scanner input = new Scanner(System.in);
 
 			String[] prePassword = new String[5];
