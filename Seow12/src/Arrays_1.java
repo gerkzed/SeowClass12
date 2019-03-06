@@ -6,60 +6,89 @@ public class Arrays_1 {
 
 		int[] numList = readFiles();
 
-		int mode = calcMode(numList);
+		Integer[] mode = calcMode(numList);
 
-		if (mode == -1) {
-
-			System.out.println("No mode");
-
+		if (mode == null) {
+			
+			System.out.println("There are no modes in the sequence.");
+			
 		}
-
+		
 		else {
+			
+			System.out.print("The mode(s) of the sequence are: ");
+			
+			for (int i = 0; i < mode.length; i++) { 
 
-			System.out.println("The mode of the file is: " + mode);
+				int j;
+				
+		        for (j = 0; j < i; j++) {
+		        	
+			           if (mode[i] == mode[j]) {
+			        	   
+			        	   break;
+			        	   
+			           }
 
+		        }
+
+		        if (i == j) {
+		        	
+		        	System.out.print(mode[i] + " ");
+		        	
+		        }
+
+		    } 
+			
 		}
 
 	}
 
-	private static int calcMode(int[] numList) {
-
-		int[] numListParallel = numList.clone();
-
-		int highest = 0, mode = 0;
-
+	private static Integer[] calcMode(int[] numList) {
+		
+		List<Integer> modes = new ArrayList<Integer>();
+		
+		int max = 0;
+		
 		for (int i = 0; i < numList.length; i++) {
-
-			int counter = 0;
-
+			
+			int count = 0;
+			
 			for (int j = 0; j < numList.length; j++) {
-
-				if (numList[i] == numListParallel[j]) {
-
-					counter++;
-
+				
+				if (numList[i] == numList[j]) {
+					
+					count++;
+					
 				}
 			}
-
-			if (counter > highest) {
-
-				highest = counter;
-				mode = numList[i];
-
+			
+			if (count > max) {
+				
+				max = count;
+				modes.clear();
+				modes.add(numList[i]);
+				
 			}
-
+			
+			else if (count == max) {
+				
+				modes.add(numList[i]);
+				
+			}
+			
 		}
-
-		if (highest == 1) {
-
-			return -1;
-
+		
+		if (max == 1) {
+			
+			return null;
+			
 		}
-
+		
 		else {
-
-			return mode;
-
+			
+			return modes.toArray(new Integer[modes.size()]);
+			
 		}
 
 	}
