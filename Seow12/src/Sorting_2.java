@@ -50,13 +50,10 @@ public class Sorting_2 {
 
 	public static int ternarySearch(int[] myArray, int start, int end, int goal) {
 		
-		int mid1;
-		int mid2;
-		
 		if (start <= end) {
 			
-			mid1 = start + ((end - 1) / 3);
-			mid2 = end - ((end - 1) / 3);
+			int mid1 = start + (end - start) / 3;
+			int mid2 = end - (end - start) / 3;
 		
 			if (myArray[mid1] == goal) {
 	
@@ -70,16 +67,14 @@ public class Sorting_2 {
 					
 			}
 				
-			if (goal < myArray[mid1]) {
-	
-				System.out.println(mid1);
+			else if (goal < myArray[mid1]) {
+
 				return ternarySearch(myArray, start, mid1 - 1, goal);
 					
 			}
 			
 			else if (goal > myArray[mid2]) {
-					
-				System.out.println(mid2);
+
 				return ternarySearch(myArray, mid2 + 1, end, goal);
 		
 			}
