@@ -11,29 +11,31 @@ public class Sorting_2 {
 	public static void main(String[] args) {
 
 		// You can modify this array and this code for testing
-		int[] myArray = { -17, -10, -8, 2, 3, 8, 16, 20, 34, 41, 50 };
+		int[] myArray = { -17, -10, -8, 2, 3, 8, 16, 20, 34, 41, 41 };
 
 		Scanner input = new Scanner(System.in);
-		int goal = -3;
+		boolean running = true;
+		int goal;
 
-		while (goal == -3) {
+		while (running) {
 
 			try {
 
 				System.out.println("Enter the number to be searched for: ");
 				goal = input.nextInt();
-
+				running = false;
+				
 				int index = ternarySearch(myArray, 0, myArray.length - 1, goal);
 
-				if (index != -1) {
+				if (index == -1) {
 
-					System.out.println("The position of " + goal + " is " + index);
+					System.out.println("The goal does not exist in the array.");
 
 				}
 
 				else {
 
-					System.out.println("The goal does not exist in the array.");
+					System.out.println("The position of " + goal + " is " + index);
 
 				}
 			}
@@ -41,11 +43,13 @@ public class Sorting_2 {
 			catch (InputMismatchException e) {
 
 				System.out.println("Invalid input.");
-				goal = -3;
 				input.nextLine();
 
 			}
 		}
+		
+		input.close();
+		
 	}
 
 	public static int ternarySearch(int[] myArray, int start, int end, int goal) {

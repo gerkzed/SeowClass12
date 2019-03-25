@@ -63,11 +63,17 @@ public class Sorting_1 {
 		
 		while(i < middle && j < right) {
 		
-			if (tempLeft[i].compareTo(tempRight[j]) < 0)
+			if (tempLeft[i].compareTo(tempRight[j]) < 0) {
+				
 				arr[k++] = tempLeft[i++];
+				
+			}
 			
-			else 
+			else {
+				
 				arr[k++] = tempRight[j++];
+				
+			}
 		
 		}
 		
@@ -82,7 +88,5 @@ public class Sorting_1 {
 	        arr[k++] = tempRight[j++];
 	        
 	    }
-		
-	
 	}
 }
