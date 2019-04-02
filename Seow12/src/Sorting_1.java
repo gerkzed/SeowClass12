@@ -59,21 +59,21 @@ public class Sorting_1 {
 		ObjectMergeSort(tempLeft);
 		ObjectMergeSort(tempRight);
 		
+		merge(arr, tempLeft, tempRight, middle, right);
+	
+	}
+	
+	private static void merge(String[] arr, String[] tempLeft, String[] tempRight, int middle, int right) {
+		
 		int i = 0, j = 0, k = 0;
 		
 		while(i < middle && j < right) {
 		
-			if (tempLeft[i].compareTo(tempRight[j]) < 0) {
-				
+			if (tempLeft[i].compareTo(tempRight[j]) < 0)
 				arr[k++] = tempLeft[i++];
-				
-			}
 			
-			else {
-				
+			else 
 				arr[k++] = tempRight[j++];
-				
-			}
 		
 		}
 		
@@ -87,6 +87,6 @@ public class Sorting_1 {
 	    	
 	        arr[k++] = tempRight[j++];
 	        
-	    }
+   		}
 	}
 }
