@@ -5,7 +5,7 @@ public class Sorting_3 {
 	public static void main(String[] args) throws IOException {
 
 		Scanner input = new Scanner(System.in);
-		
+
 		Friend[] friends = readDatabase("friends.txt");
 
 		boolean looping = true;
@@ -49,7 +49,7 @@ public class Sorting_3 {
 					System.exit(0);
 				default:
 					System.out.println("Invalid input, only numbers between 1 and 6.");
-					break;
+					throw new InputMismatchException();
 
 				}
 
@@ -58,7 +58,7 @@ public class Sorting_3 {
 			catch (InputMismatchException e) {
 
 				System.out.println("Invalid input.");
-				choice = 0;
+				System.exit(0);
 
 			}
 
@@ -69,7 +69,7 @@ public class Sorting_3 {
 	private static Friend[] readDatabase(String filename) throws FileNotFoundException, IOException {
 
 		Scanner input = new Scanner(new File(filename));
-		
+
 		int lines = input.nextInt();
 		input.nextLine();
 
@@ -90,7 +90,7 @@ public class Sorting_3 {
 	private static void addFriend(Friend[] friends) throws IOException {
 
 		try {
-			
+
 			Scanner input = new Scanner(System.in);
 
 			String[] inputs = new String[4];
@@ -122,30 +122,30 @@ public class Sorting_3 {
 				inputs[3] = VerifyNumber(input.nextLine());
 
 			}
-	
+
 			Scanner file = new Scanner(new File("friends.txt"));
-			
+
 			int lines = file.nextInt();
 			file.nextLine();
-			
+
 			String[] tempFile = new String[lines];
-			
+
 			for (int i = 0; i < lines; i++) {
-				
+
 				tempFile[i] = file.nextLine();
-				
+
 			}
-			
+
 			PrintWriter pr = new PrintWriter(new BufferedWriter(new FileWriter("friends.txt")));
-			
+
 			pr.println(lines + 1);
-			
+
 			for (int i = 0; i < lines; i++) {
-				
+
 				pr.println(tempFile[i]);
-				
+
 			}
-			
+
 			pr.println(inputs[0] + "/" + inputs[1] + "/" + inputs[2] + "/" + inputs[3]);
 
 			pr.close();
@@ -157,164 +157,192 @@ public class Sorting_3 {
 			System.out.println("Invalid input.");
 
 		}
-		
+
 	}
 
 	private static void displayFriends(Friend[] friends, int name) {
 
+		// FIRST
+		if (name == 1) {
+
+			String[] lastNameFriends = new String[friends.length];
+
+			for (int i = 0; i < friends.length; i++) {
+
+				lastNameFriends[i] = friends[i].getName(0);
+
+			}
+
+			WillLib.mergesort(lastNameFriends);
+
+			for (int i = 0; i < friends.length; i++) {
+
+				System.out.println(i + ": " + lastNameFriends[i]);
+
+			}
+
+			System.out.println();
+
+		}
+
 		// LAST
 		if (name == 0) {
-			
+
+			String[] firstNameFriends = new String[friends.length];
+
 			for (int i = 0; i < friends.length; i++) {
 
-				System.out.println(i + ": " + friends[i].getName(0));
+				firstNameFriends[i] = friends[i].getName(1);
 
 			}
 
-			System.out.println();
-			
-			
-		}
-		
-		//FIRST
-		if (name == 1) {
-			
+			WillLib.mergesort(firstNameFriends);
+
 			for (int i = 0; i < friends.length; i++) {
 
-				System.out.println(i + ": " + friends[i].getName(1));
+				System.out.println(i + ": " + firstNameFriends[i]);
 
 			}
 
 			System.out.println();
 
-			
 		}
 	}
 
 	private static void searchFriends(Friend[] friends) {
-		
+
 		Scanner input = new Scanner(System.in);
-		
+
 		System.out.println("Enter friend to be searched for (name, email, phone number):  ");
 		String key = input.nextLine();
-		
-		//Check Email
-		if(key.contains("@")) {
-			
+
+		// Check Email
+		if (key.contains("@")) {
+
 			for (int i = 0; i < friends.length; i++) {
-				
-				if(friends[i].getEmail().contains(key)) {
-					
+
+				if (friends[i].getEmail().contains(key)) {
+
 					System.out.println(i + ": " + friends[i]);
 					System.out.println();
-					
+
 				}
 			}
 		}
-		
-		//Check Number
-		else if(key.matches("\\d+")) {
-			
+
+		// Check Number
+		else if (key.matches("\\d+")) {
+
 			for (int i = 0; i < friends.length; i++) {
-				
-				if(friends[i].getPhone().contains(key)) {
-					
+
+				if (friends[i].getPhone().contains(key)) {
+
 					System.out.println(i + ": " + friends[i]);
 					System.out.println();
-					
+
 				}
 			}
 		}
-		
-		//Check Names
-		else if(key.matches("[a-zA-Z]*")) {
-			
+
+		// Check Names
+		else if (key.matches("[a-zA-Z]*")) {
+
 			for (int i = 0; i < friends.length; i++) {
-				
-				if(friends[i].getName(1).contains(key)) {
-					
+
+				if (friends[i].getName(1).contains(key)) {
+
 					System.out.println(i + ": " + friends[i]);
 					System.out.println();
-					
+
 				}
-				
-				if(friends[i].getName(0).contains(key)) {
-					
+
+				else if (friends[i].getName(0).contains(key)) {
+
 					System.out.println(i + ": " + friends[i]);
 					System.out.println();
-					
+
 				}
 			}
 		}
-		
+
 		else {
-			
+
 			System.out.println("Invalid search!");
-			
+
 		}
 	}
 
 	private static void deleteFriend(Friend[] friends) throws IOException {
-		
+
 		Scanner input = new Scanner(System.in);
 
-		int index;
-		
+		String search;
+
 		try {
 
-			System.out.println("Choose an index to delete from the database: (Numbers 0 through " + (friends.length - 1) + ")  ");
-			index = input.nextInt();
-		
-			if (index > friends.length - 1 || index < 0) {
-				
-				throw new InputMismatchException();
-				
-			}
-			
-			
+			System.out.println("Enter friend to be deleted (name, email, phone number):  ");
+			search = input.nextLine();
+
 			Scanner file = new Scanner(new File("friends.txt"));
-			
-			int lines = file.nextInt();
+
+			String[] tempFile = new String[friends.length];
 			file.nextLine();
-			
-			String[] tempFile = new String[lines - 1];
-			
-			for (int i = 0, k = 0; i < lines; i++) {
-				
-				if (i != index) {
-					
+
+			for (int i = 0, k = 0; i < friends.length; i++) {
+
+				if (file.hasNext() && !file.nextLine().contains(search)) {
+
 					tempFile[k] = file.nextLine();
-					
+					k++;
+
 				}
-				
-				k++;
-				
+
+				else {
+
+					continue;
+
+				}
+
 			}
-			
+
 			PrintWriter pr = new PrintWriter(new BufferedWriter(new FileWriter("friends.txt")));
-			
-			pr.println(lines - 1);
-			
-			for (int i = 0; i < lines - 1; i++) {
-				
-				pr.println(tempFile[i]);
-				
+
+			int counter = 0;
+
+			for (int i = 0; i < tempFile.length; i++) {
+
+				if (tempFile[i] != null) {
+
+					counter++;
+
+				}
+
+			}
+
+			pr.println(counter);
+
+			for (int i = 0, k = 0; i < tempFile.length; i++) {
+
+				if (tempFile[i] != null) {
+
+					pr.println(tempFile[i]);
+
+				}
+
 			}
 
 			pr.close();
-			
-			System.out.println("Index #" + index + " was deleted.");
-			
+
 		}
-		
+
 		catch (InputMismatchException e) {
-			
+
 			System.out.println("Invalid Input!");
-			
+
 		}
-		
+
 	}
-	
+
 	private static String VerifyName(String nextLine) {
 
 		if (nextLine.replaceAll("\\s+", "").matches("[a-zA-Z]*")) {
@@ -333,7 +361,7 @@ public class Sorting_3 {
 
 	private static String VerifyEmail(String nextLine) {
 
-		if (nextLine.contains("@")) {
+		if (nextLine.contains(".com")) {
 
 			return nextLine;
 
