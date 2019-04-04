@@ -4,6 +4,8 @@ import java.util.*;
 public class Sorting_3 {
 	public static void main(String[] args) throws IOException {
 
+		Scanner input = new Scanner(System.in);
+		
 		Friend[] friends = readDatabase("friends.txt");
 
 		boolean looping = true;
@@ -20,30 +22,31 @@ public class Sorting_3 {
 
 			try {
 
-				Scanner input = new Scanner(System.in);
 				choice = input.nextInt();
 
 				switch (choice) {
 
-				case 0:
-					break;
 				case 1:
-					friends = addFriend(friends);
+					addFriend(friends);
+					friends = readDatabase("friends.txt");
 					break;
 				case 2:
-					displayFriendsLast(friends);
+					displayFriends(friends, 0);
 					break;
 				case 3:
-					displayFriendsFirst(friends);
+					displayFriends(friends, 1);
 					break;
 				case 4:
 					searchFriends(friends);
 					break;
 				case 5:
-					friends = deleteFriend(friends);
-				case 6:
-					looping = false;
+					deleteFriend(friends);
+					friends = readDatabase("friends.txt");
 					break;
+				case 6:
+					System.out.println("Quitting program");
+					looping = false;
+					System.exit(0);
 				default:
 					System.out.println("Invalid input, only numbers between 1 and 6.");
 					break;
@@ -66,7 +69,7 @@ public class Sorting_3 {
 	private static Friend[] readDatabase(String filename) throws FileNotFoundException, IOException {
 
 		Scanner input = new Scanner(new File(filename));
-
+		
 		int lines = input.nextInt();
 		input.nextLine();
 
@@ -80,25 +83,15 @@ public class Sorting_3 {
 
 		}
 
-		input.close();
-
 		return friends;
 
 	}
 
-	private static Friend[] addFriend(Friend[] friends) throws IOException {
-
-		Scanner input = new Scanner(System.in);
-		
-		Friend[] friendsnew = new Friend[friends.length + 1];
-
-		for (int i = 0; i < friends.length; i++) {
-
-			friendsnew[i] = friends[i];
-
-		}
+	private static void addFriend(Friend[] friends) throws IOException {
 
 		try {
+			
+			Scanner input = new Scanner(System.in);
 
 			String[] inputs = new String[4];
 
@@ -129,8 +122,33 @@ public class Sorting_3 {
 				inputs[3] = VerifyNumber(input.nextLine());
 
 			}
+	
+			Scanner file = new Scanner(new File("friends.txt"));
+			
+			int lines = file.nextInt();
+			file.nextLine();
+			
+			String[] tempFile = new String[lines];
+			
+			for (int i = 0; i < lines; i++) {
+				
+				tempFile[i] = file.nextLine();
+				
+			}
+			
+			PrintWriter pr = new PrintWriter(new BufferedWriter(new FileWriter("friends.txt")));
+			
+			pr.println(lines + 1);
+			
+			for (int i = 0; i < lines; i++) {
+				
+				pr.println(tempFile[i]);
+				
+			}
+			
+			pr.println(inputs[0] + "/" + inputs[1] + "/" + inputs[2] + "/" + inputs[3]);
 
-			friendsnew[friends.length] = new Friend(inputs[0], inputs[1], inputs[2], inputs[3]);
+			pr.close();
 
 		}
 
@@ -139,33 +157,38 @@ public class Sorting_3 {
 			System.out.println("Invalid input.");
 
 		}
-
-		return friendsnew;
-
+		
 	}
 
-	private static void displayFriendsLast(Friend[] friends) {
+	private static void displayFriends(Friend[] friends, int name) {
 
-		for (int i = 0; i < friends.length; i++) {
+		// LAST
+		if (name == 0) {
+			
+			for (int i = 0; i < friends.length; i++) {
 
-			System.out.println(i + ": " + friends[i].getName(0));
+				System.out.println(i + ": " + friends[i].getName(0));
 
+			}
+
+			System.out.println();
+			
+			
 		}
+		
+		//FIRST
+		if (name == 1) {
+			
+			for (int i = 0; i < friends.length; i++) {
 
-		System.out.println();
+				System.out.println(i + ": " + friends[i].getName(1));
 
-	}
+			}
 
-	private static void displayFriendsFirst(Friend[] friends) {
+			System.out.println();
 
-		for (int i = 0; i < friends.length; i++) {
-
-			System.out.println(i + ": " + friends[i].getName(1));
-
+			
 		}
-
-		System.out.println();
-
 	}
 
 	private static void searchFriends(Friend[] friends) {
@@ -176,7 +199,7 @@ public class Sorting_3 {
 		String key = input.nextLine();
 		
 		//Check Email
-		if(key.contains("@gmail.com")) {
+		if(key.contains("@")) {
 			
 			for (int i = 0; i < friends.length; i++) {
 				
@@ -231,30 +254,56 @@ public class Sorting_3 {
 		}
 	}
 
-	private static Friend[] deleteFriend(Friend[] friends) {
+	private static void deleteFriend(Friend[] friends) throws IOException {
 		
-		Scanner inputDelete = new Scanner(System.in);
-		
-		Friend[] friendsnew = new Friend[friends.length - 1];
+		Scanner input = new Scanner(System.in);
 
 		int index;
 		
 		try {
 
-			System.out.println("Choose an index to delete from the database: (Numbers 0 through " + (friends.length - 1));
-			index = inputDelete.nextInt();
+			System.out.println("Choose an index to delete from the database: (Numbers 0 through " + (friends.length - 1) + ")  ");
+			index = input.nextInt();
 		
-			for (int i = 0, k = 0; i < friendsnew.length; i++) {
+			if (index > friends.length - 1 || index < 0) {
 				
-				if (i == index) {
+				throw new InputMismatchException();
+				
+			}
+			
+			
+			Scanner file = new Scanner(new File("friends.txt"));
+			
+			int lines = file.nextInt();
+			file.nextLine();
+			
+			String[] tempFile = new String[lines - 1];
+			
+			for (int i = 0, k = 0; i < lines; i++) {
+				
+				if (i != index) {
 					
-					continue;
+					tempFile[k] = file.nextLine();
 					
 				}
 				
-				friendsnew[k++] = friends[i];
+				k++;
 				
 			}
+			
+			PrintWriter pr = new PrintWriter(new BufferedWriter(new FileWriter("friends.txt")));
+			
+			pr.println(lines - 1);
+			
+			for (int i = 0; i < lines - 1; i++) {
+				
+				pr.println(tempFile[i]);
+				
+			}
+
+			pr.close();
+			
+			System.out.println("Index #" + index + " was deleted.");
 			
 		}
 		
@@ -263,8 +312,6 @@ public class Sorting_3 {
 			System.out.println("Invalid Input!");
 			
 		}
-		
-		return friendsnew;
 		
 	}
 	
@@ -284,10 +331,9 @@ public class Sorting_3 {
 		}
 	}
 
-	
 	private static String VerifyEmail(String nextLine) {
 
-		if (nextLine.contains("@gmail.com")) {
+		if (nextLine.contains("@")) {
 
 			return nextLine;
 
@@ -301,7 +347,6 @@ public class Sorting_3 {
 		}
 	}
 
-	
 	private static String VerifyNumber(String nextLine) {
 
 		nextLine = nextLine.replace("-", "");
