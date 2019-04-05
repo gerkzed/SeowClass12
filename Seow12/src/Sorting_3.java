@@ -14,8 +14,8 @@ public class Sorting_3 {
 		while (looping) {
 
 			System.out.println("1) Add a friend: ");
-			System.out.println("2) Display friends by last name: ");
-			System.out.println("3) Display friends by first name: ");
+			System.out.println("2) Display friends by first name: ");
+			System.out.println("3) Display friends by last name: ");
 			System.out.println("4) Find a friend: ");
 			System.out.println("5) Delete a friend: ");
 			System.out.println("6) Quit: ");
@@ -48,9 +48,7 @@ public class Sorting_3 {
 					looping = false;
 					System.exit(0);
 				default:
-					System.out.println("Invalid input, only numbers between 1 and 6.");
 					throw new InputMismatchException();
-
 				}
 
 			}
@@ -275,6 +273,7 @@ public class Sorting_3 {
 	private static void deleteFriend(Friend[] friends) throws IOException {
 
 		Scanner input = new Scanner(System.in);
+		Scanner file = new Scanner(new File("friends.txt"));
 
 		String search;
 
@@ -283,26 +282,30 @@ public class Sorting_3 {
 			System.out.println("Enter friend to be deleted (name, email, phone number):  ");
 			search = input.nextLine();
 
-			Scanner file = new Scanner(new File("friends.txt"));
-
-			String[] tempFile = new String[friends.length];
+			int lines = file.nextInt();
 			file.nextLine();
 
-			for (int i = 0, k = 0; i < friends.length; i++) {
+			String[] tempFile = new String[friends.length];
 
-				if (file.hasNext() && !file.nextLine().contains(search)) {
-
-					tempFile[k] = file.nextLine();
-					k++;
-
-				}
-
-				else {
-
+			int k = 0;
+		
+			while (file.hasNextLine()) {
+				
+				String next = file.nextLine();
+				
+				if (next.contains(search)) {
+					
+					System.out.println(friends[k].getName(0) + " " + friends[k].getName(1) + " has been deleted from the database.");
 					continue;
-
+					
 				}
-
+				
+				else {
+					
+					tempFile[k] = next;
+					k++;
+					
+				}
 			}
 
 			PrintWriter pr = new PrintWriter(new BufferedWriter(new FileWriter("friends.txt")));
@@ -318,10 +321,16 @@ public class Sorting_3 {
 				}
 
 			}
+			
+			if (counter == tempFile.length) {
+				
+				System.out.println("Search has no results, nobody was deleted from the database.");
+				
+			}
 
 			pr.println(counter);
 
-			for (int i = 0, k = 0; i < tempFile.length; i++) {
+			for (int i = 0; i < tempFile.length; i++) {
 
 				if (tempFile[i] != null) {
 
@@ -361,7 +370,7 @@ public class Sorting_3 {
 
 	private static String VerifyEmail(String nextLine) {
 
-		if (nextLine.contains(".com")) {
+		if (nextLine.contains("@") && nextLine.contains(".com")) {
 
 			return nextLine;
 

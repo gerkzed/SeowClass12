@@ -1,9 +1,5 @@
-20
-Wang/Alice/alice.wang@live.ca/416-245-4477
-Vijaya Kumar/Shamini/shamini.vkumar@live.ca/416-225-8456
-Beg/Natalie/beg.nat@gmail.com/647-255-6478
+18
 Intas/Tautvydas/tudy.intas@yahoo.ca/416-258-7489
-Popadiuk/Roman/roman.pop@live.ca/647-889-7426
 Lucchitti/Matthew/matt.lucch@gmail.com/416-326-5668
 Gu/Alex/a.gu@gmail.com/647-245-6698
 Akif/Rabeea/r.akif@yahoo.com/647-878-7799
@@ -19,3 +15,5 @@ Marjoram/John/john.marjoram@gmail.com/674-998-5003
 Bondi/Joseph/pat_ruel@hotmail.com/416-236-5004
 Tchorni/Daniel/tchorni.d@gmail.com/647-898-7841
 Rea/Castillo/rea.castillo@gmail.com/416-898-1687
+William/Siddeley/will.iams.sapo@gmail.com/1234567890
+Spencer/Gallop/spencer@gmail.com/1234567890
