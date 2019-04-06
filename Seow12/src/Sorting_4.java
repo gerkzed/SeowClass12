@@ -4,6 +4,19 @@ import java.util.*;
 public class Sorting_4 {
 	public static void main(String[] args) throws IOException {
 
+		/*
+		
+		MAZE LEGEND
+		________________
+		
+		x = WALL
+		$ = GOAL
+		  = VALID SPACE
+		+ = PATH THE ALGORITHM TOOK
+		# = PATH THE ALGORTIHM TOOK AND HAD TO BACKTRACK
+
+		*/
+		
 		final String filename = "maze3.txt";
 		
 		String[][] maze = parseMaze(filename);
