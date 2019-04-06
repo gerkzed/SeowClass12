@@ -4,6 +4,8 @@ import java.util.*;
 public class Sorting_3 {
 	public static void main(String[] args) throws IOException {
 
+		final String filename = "friends.txt";
+		
 		Scanner input = new Scanner(System.in);
 
 		Friend[] friends = readDatabase("friends.txt");
@@ -27,8 +29,8 @@ public class Sorting_3 {
 				switch (choice) {
 
 				case 1:
-					addFriend(friends);
-					friends = readDatabase("friends.txt");
+					addFriend(friends, filename);
+					friends = readDatabase(filename);
 					break;
 				case 2:
 					displayFriends(friends, 0);
@@ -40,8 +42,8 @@ public class Sorting_3 {
 					searchFriends(friends);
 					break;
 				case 5:
-					deleteFriend(friends);
-					friends = readDatabase("friends.txt");
+					deleteFriend(friends, filename);
+					friends = readDatabase(filename);
 					break;
 				case 6:
 					System.out.println("Quitting program");
@@ -85,11 +87,12 @@ public class Sorting_3 {
 
 	}
 
-	private static void addFriend(Friend[] friends) throws IOException {
+	private static void addFriend(Friend[] friends, String filename) throws IOException {
 
+		Scanner input = new Scanner(System.in);
+		Scanner file = new Scanner(new File(filename));
+		
 		try {
-
-			Scanner input = new Scanner(System.in);
 
 			String[] inputs = new String[4];
 
@@ -121,8 +124,6 @@ public class Sorting_3 {
 
 			}
 
-			Scanner file = new Scanner(new File("friends.txt"));
-
 			int lines = file.nextInt();
 			file.nextLine();
 
@@ -134,7 +135,7 @@ public class Sorting_3 {
 
 			}
 
-			PrintWriter pr = new PrintWriter(new BufferedWriter(new FileWriter("friends.txt")));
+			PrintWriter pr = new PrintWriter(new BufferedWriter(new FileWriter(filename)));
 
 			pr.println(lines + 1);
 
@@ -258,10 +259,10 @@ public class Sorting_3 {
 		}
 	}
 
-	private static void deleteFriend(Friend[] friends) throws IOException {
+	private static void deleteFriend(Friend[] friends, String filename) throws IOException {
 
 		Scanner input = new Scanner(System.in);
-		Scanner file = new Scanner(new File("friends.txt"));
+		Scanner file = new Scanner(new File(filename));
 
 		String search;
 
@@ -275,7 +276,7 @@ public class Sorting_3 {
 
 			String[] tempFile = new String[friends.length];
 
-			int k = 0;
+			int k = 0, l = 0;
 		
 			while (file.hasNextLine()) {
 				
@@ -283,7 +284,7 @@ public class Sorting_3 {
 				
 				if (next.contains(search)) {
 					
-					System.out.println(friends[k].getName(0) + " " + friends[k].getName(1) + " has been deleted from the database.");
+					l++;
 					continue;
 					
 				}
@@ -296,7 +297,7 @@ public class Sorting_3 {
 				}
 			}
 
-			PrintWriter pr = new PrintWriter(new BufferedWriter(new FileWriter("friends.txt")));
+			PrintWriter pr = new PrintWriter(new BufferedWriter(new FileWriter(filename)));
 
 			int counter = 0;
 
@@ -313,6 +314,12 @@ public class Sorting_3 {
 			if (counter == tempFile.length) {
 				
 				System.out.println("Search has no results, nobody was deleted from the database.");
+				
+			}
+			
+			else {
+				
+				System.out.println(l + " entries were deleted from the database.");
 				
 			}
 
