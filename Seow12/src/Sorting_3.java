@@ -96,28 +96,28 @@ public class Sorting_3 {
 			while (inputs[0] == null) {
 
 				System.out.println("Enter first name: ");
-				inputs[0] = VerifyName(input.nextLine());
+				inputs[0] = WillLib.VerifyName(input.nextLine());
 
 			}
 
 			while (inputs[1] == null) {
 
 				System.out.println("Enter last name: ");
-				inputs[1] = VerifyName(input.nextLine());
+				inputs[1] = WillLib.VerifyName(input.nextLine());
 
 			}
 
 			while (inputs[2] == null) {
 
 				System.out.println("Enter email: ");
-				inputs[2] = VerifyEmail(input.nextLine());
+				inputs[2] = WillLib.VerifyEmail(input.nextLine());
 
 			}
 
 			while (inputs[3] == null) {
 
 				System.out.println("Enter phone number: ");
-				inputs[3] = VerifyNumber(input.nextLine());
+				inputs[3] = WillLib.VerifyNumber(input.nextLine());
 
 			}
 
@@ -173,18 +173,12 @@ public class Sorting_3 {
 
 			WillLib.mergesort(lastNameFriends);
 
-			for (int i = 0; i < friends.length; i++) {
-
-				System.out.println(i + ": " + lastNameFriends[i]);
-
-			}
-
-			System.out.println();
+			WillLib.printArray(lastNameFriends);
 
 		}
 
 		// LAST
-		if (name == 0) {
+		else if (name == 0) {
 
 			String[] firstNameFriends = new String[friends.length];
 
@@ -196,13 +190,7 @@ public class Sorting_3 {
 
 			WillLib.mergesort(firstNameFriends);
 
-			for (int i = 0; i < friends.length; i++) {
-
-				System.out.println(i + ": " + firstNameFriends[i]);
-
-			}
-
-			System.out.println();
+			WillLib.printArray(firstNameFriends);
 
 		}
 	}
@@ -349,58 +337,5 @@ public class Sorting_3 {
 			System.out.println("Invalid Input!");
 
 		}
-
 	}
-
-	private static String VerifyName(String nextLine) {
-
-		if (nextLine.replaceAll("\\s+", "").matches("[a-zA-Z]*")) {
-
-			return nextLine;
-
-		}
-
-		else {
-
-			System.out.println("Error: Invalid name!");
-			return null;
-
-		}
-	}
-
-	private static String VerifyEmail(String nextLine) {
-
-		if (nextLine.contains("@") && nextLine.contains(".com")) {
-
-			return nextLine;
-
-		}
-
-		else {
-
-			System.out.println("Invalid email!");
-			return null;
-
-		}
-	}
-
-	private static String VerifyNumber(String nextLine) {
-
-		nextLine = nextLine.replace("-", "");
-
-		if (nextLine.matches("\\d+") && nextLine.length() == 10) {
-
-			return nextLine;
-
-		}
-
-		else {
-
-			System.out.println("Invalid number!");
-			return null;
-
-		}
-
-	}
-
 }

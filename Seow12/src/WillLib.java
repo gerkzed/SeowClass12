@@ -30,12 +30,6 @@ public class WillLib {
 		mergesort(tempLeft);
 		mergesort(tempRight);
 
-		merge(arr, tempLeft, tempRight, middle, right);
-
-	}
-
-	private static void merge(String[] arr, String[] tempLeft, String[] tempRight, int middle, int right) {
-
 		int i = 0, j = 0, k = 0;
 
 		while (i < middle && j < right) {
@@ -59,6 +53,69 @@ public class WillLib {
 			arr[k++] = tempRight[j++];
 
 		}
+
+	}
+
+	public static String VerifyName(String name) {
+
+		if (name.replaceAll("\\s+", "").matches("[a-zA-Z]*")) {
+
+			return name;
+
+		}
+
+		else {
+
+			System.out.println("Error: Invalid name!");
+			return null;
+
+		}
+	}
+
+	public static String VerifyEmail(String email) {
+
+		if (email.contains("@") && email.contains(".com")) {
+
+			return email;
+
+		}
+
+		else {
+
+			System.out.println("Invalid email!");
+			return null;
+
+		}
+	}
+
+	public static String VerifyNumber(String number) {
+
+		number = number.replace("-", "");
+
+		if (number.matches("\\d+") && number.length() == 10) {
+
+			return number;
+
+		}
+
+		else {
+
+			System.out.println("Invalid number!");
+			return null;
+
+		}
+
+	}
+
+	public static void printArray(String[] array) {
+		
+		for (int i = 0; i < array.length; i++) {
+
+			System.out.println(array[i]);
+
+		}
+		
+		
 	}
 
 }
