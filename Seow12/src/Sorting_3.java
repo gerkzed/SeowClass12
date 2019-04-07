@@ -68,21 +68,22 @@ public class Sorting_3 {
 
 	private static Friend[] readDatabase(String filename) throws FileNotFoundException, IOException {
 
-		Scanner input = new Scanner(new File(filename));
+		BufferedReader reader = new BufferedReader(new FileReader(filename));
 
-		int lines = input.nextInt();
-		input.nextLine();
+		int lines = Integer.parseInt(reader.readLine());
 
 		Friend[] friends = new Friend[lines];
 
 		for (int i = 0; i < lines; i++) {
 
-			String[] information = input.nextLine().split("/");
+			String[] information = reader.readLine().split("/");
 
 			friends[i] = new Friend(information[0], information[1], information[2], information[3]);
 
 		}
 
+		reader.close();
+		
 		return friends;
 
 	}
@@ -90,7 +91,8 @@ public class Sorting_3 {
 	private static void addFriend(Friend[] friends, String filename) throws IOException {
 
 		Scanner input = new Scanner(System.in);
-		Scanner file = new Scanner(new File(filename));
+
+		BufferedReader reader = new BufferedReader(new FileReader(filename));
 		
 		try {
 
@@ -124,14 +126,13 @@ public class Sorting_3 {
 
 			}
 
-			int lines = file.nextInt();
-			file.nextLine();
+			int lines = Integer.parseInt(reader.readLine());;
 
 			String[] tempFile = new String[lines];
 
 			for (int i = 0; i < lines; i++) {
 
-				tempFile[i] = file.nextLine();
+				tempFile[i] = reader.readLine();
 
 			}
 
@@ -262,7 +263,8 @@ public class Sorting_3 {
 	private static void deleteFriend(Friend[] friends, String filename) throws IOException {
 
 		Scanner input = new Scanner(System.in);
-		Scanner file = new Scanner(new File(filename));
+		
+		BufferedReader reader = new BufferedReader(new FileReader(filename));
 
 		String search;
 
@@ -271,30 +273,29 @@ public class Sorting_3 {
 			System.out.println("Enter friend to be deleted (name, email, phone number):  ");
 			search = input.nextLine();
 
-			int lines = file.nextInt();
-			file.nextLine();
-
 			String[] tempFile = new String[friends.length];
+			String[] deleted = new String[friends.length];
 
-			int k = 0, l = 0;
-		
-			while (file.hasNextLine()) {
+			int lines = Integer.parseInt(reader.readLine());
+
+			for (int i = 0; i < lines; i++) {
 				
-				String next = file.nextLine();
+				String line = reader.readLine();
 				
-				if (next.contains(search)) {
+				if (line.contains(search)) {
 					
-					l++;
-					continue;
+					deleted[i] = line;
 					
 				}
 				
 				else {
 					
-					tempFile[k] = next;
-					k++;
+					tempFile[i] = line;
 					
 				}
+				
+				
+				
 			}
 
 			PrintWriter pr = new PrintWriter(new BufferedWriter(new FileWriter(filename)));
@@ -319,7 +320,7 @@ public class Sorting_3 {
 			
 			else {
 				
-				System.out.println(l + " entries were deleted from the database.");
+				System.out.println(deleted.length - counter + " entries were deleted from the database.");
 				
 			}
 
