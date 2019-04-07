@@ -60,12 +60,18 @@ public class Sorting_4 {
 
 		for (int i = 0; i < maze.length; i++) {
 
-			System.out.println(Arrays.deepToString(maze[i]));
-
+			for (int k = 0; k < maze[i].length; k++) {
+				
+				System.out.print(maze[i][k]);
+				
+			}
+			
+			System.out.println();
+			
 		}
-
+		
 		System.out.println();
-
+		
 	}
 
 	private static void printRoute(String[][] maze, int x, int y) {
