@@ -34,7 +34,7 @@ public class WillLib {
 
 		while (i < middle && j < right) {
 
-			if (tempLeft[i].compareTo(tempRight[j]) < 0)
+			if ((tempLeft[i].toUpperCase()).compareTo(tempRight[j].toUpperCase()) < 0)
 				arr[k++] = tempLeft[i++];
 
 			else

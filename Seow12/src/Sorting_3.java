@@ -282,7 +282,7 @@ public class Sorting_3 {
 				
 				String line = reader.readLine();
 				
-				if (line.contains(search)) {
+				if (friends[i].getName(0).equals(search) || friends[i].getName(1).equals(search) || friends[i].getPhone().equals(search) || friends[i].getEmail().equals(search)) {
 					
 					deleted[i] = line;
 					
