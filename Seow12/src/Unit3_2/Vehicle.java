@@ -1,13 +1,12 @@
 package Unit3_2;
 
-public class Vehicle {
+public abstract class Vehicle {
 
 	private String owner;
 	private String insurance;
 
 	private int registration;
 	private int wheels;
-	private int axels;
 
 	public Vehicle() {
 
@@ -15,17 +14,15 @@ public class Vehicle {
 		this.insurance = "";
 		this.registration = 0;
 		this.wheels = 4;
-		this.axels = 2;
 
 	}
 
-	public Vehicle(String own, String ins, int reg, int wheel, int axel) {
+	public Vehicle(String own, String ins, int reg, int wheel) {
 
 		this.owner = own;
 		this.insurance = ins;
 		this.registration = reg;
 		this.wheels = wheel;
-		this.axels = axel;
 
 	}
 
@@ -77,16 +74,7 @@ public class Vehicle {
 
 	}
 
-	public int getAxels() {
-
-		return axels;
-
-	}
-
-	public void setAxels(int axel) {
-
-		this.axels = axel;
-
-	}
+	abstract void startEngine();
+	
 
 }

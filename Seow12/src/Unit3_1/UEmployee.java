@@ -28,15 +28,33 @@ public class UEmployee {
 
 	}
 
+	public void setFirstName(String f) {
+
+		this.firstName = f;
+
+	}
+
 	public String getLastName() {
 
 		return lastName;
 
 	}
 
+	public void setLastName(String l) {
+
+		this.lastName = l;
+
+	}
+
 	public double getSalary() {
 
 		return salary;
+
+	}
+
+	public void setSalary(double s) {
+
+		this.salary = s;
 
 	}
 }

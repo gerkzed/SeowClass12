@@ -7,6 +7,7 @@ public class Faculty extends UEmployee {
 	public Faculty() {
 
 		super();
+
 		this.department = "";
 
 	}
@@ -14,6 +15,7 @@ public class Faculty extends UEmployee {
 	public Faculty(String first, String last, double money, String dept) {
 
 		super(first, last, money);
+
 		this.department = dept;
 
 	}

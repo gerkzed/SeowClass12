@@ -13,9 +13,9 @@ public class Motorcycle extends Vehicle {
 
 	}
 
-	public Motorcycle(String own, String ins, int reg, int wheel, int axel, int doors, int wheelS, String br) {
+	public Motorcycle(String own, String ins, int reg, int wheel, int doors, int wheelS, String br) {
 
-		super(own, ins, reg, wheel, axel);
+		super(own, ins, reg, wheel);
 		this.wheelSize = wheelS;
 		this.brand = br;
 
@@ -43,6 +43,13 @@ public class Motorcycle extends Vehicle {
 
 		this.brand = br;
 
+	}
+
+	@Override
+	public void startEngine() {
+		
+		System.out.println("Starting Motorcycle Engine!");
+		
 	}
 
 }

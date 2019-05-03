@@ -7,6 +7,7 @@ public class Staff extends UEmployee {
 	public Staff() {
 
 		super();
+
 		this.title = "";
 
 	}
@@ -14,6 +15,7 @@ public class Staff extends UEmployee {
 	public Staff(String first, String last, double money, String job) {
 
 		super(first, last, money);
+
 		this.title = job;
 
 	}

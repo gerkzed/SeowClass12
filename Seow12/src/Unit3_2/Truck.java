@@ -2,34 +2,34 @@ package Unit3_2;
 
 public class Truck extends Vehicle {
 
-	private double carryingCapacity;
+	private double truckbedSize;
 	private boolean containerAttached;
 
 	public Truck() {
 
 		super();
-		this.carryingCapacity = 10;
+		this.truckbedSize = 10;
 		this.containerAttached = false;
 
 	}
 
-	public Truck(String own, String ins, int reg, int wheel, int axel, double carry, boolean container) {
+	public Truck(String own, String ins, int reg, int wheel, double carry, boolean container) {
 
-		super(own, ins, reg, wheel, axel);
-		this.carryingCapacity = carry;
+		super(own, ins, reg, wheel);
+		this.truckbedSize = carry;
 		this.containerAttached = container;
 
 	}
 
-	public double getCarryCapacity() {
+	public double getTruckbedSize() {
 
-		return carryingCapacity;
+		return truckbedSize;
 
 	}
 
-	public void setCarryCapacity(double carry) {
+	public void setTruckbedSize(double carry) {
 
-		this.carryingCapacity = carry;
+		this.truckbedSize = carry;
 
 	}
 
@@ -37,6 +37,13 @@ public class Truck extends Vehicle {
 
 		return containerAttached;
 
+	}
+
+	@Override
+	public void startEngine() {
+		
+		System.out.println("Starting Truck Engine!");
+		
 	}
 
 }
